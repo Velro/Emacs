@@ -1,0 +1,5 @@
+to have console messages direct to the correct file/line number in an open emacs client, select emacsclientw.exe as your external editor, use
+
++$(Line) $(File)
+
+as the command line arg
