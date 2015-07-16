@@ -1,0 +1,3 @@
+C:\Python27;
+C:\Program Files\cURL\bin;
+C:\Users\James\Documents\GitHub\omnisharpserver\OmniSharp\bin\Debug

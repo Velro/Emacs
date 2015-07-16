@@ -1,0 +1,2 @@
+using project-csharp.sln doesn't seem to work,
+project.sln and unityvs.project.sln work, might as well just use unityvs.project.sln for everything

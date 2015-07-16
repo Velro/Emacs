@@ -657,15 +657,15 @@
 
 (add-to-list 'default-frame-alist '(font . "Courier New-8"))
 (set-face-attribute 'default t :font "Courier New-8")
-(set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
-(set-face-attribute 'font-lock-comment-face nil :foreground "gray50")
-(set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
-(set-face-attribute 'font-lock-doc-face nil :foreground "gray50")
-(set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
-(set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
-(set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
-(set-face-attribute 'font-lock-type-face nil :foreground "burlywood3")
-(set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
+;(set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
+;(set-face-attribute 'font-lock-comment-face nil :foreground "gray50")
+;(set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
+;(set-face-attribute 'font-lock-doc-face nil :foreground "gray50")
+;(set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
+;(set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
+;(set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
+;(set-face-attribute 'font-lock-type-face nil :foreground "burlywood3")
+;(set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
 
 (defun post-load-stuff ()
   (interactive)
@@ -719,7 +719,7 @@
 (flycheck-define-checker csharp-unity
 "Custom checker for Unity projects"
 :modes (csharp-mode)
-:command ("python" (eval (concat (projectile-project-root) "/make.py slow " (projectile-project-root))))  
+:command ("python" (eval (concat (projectile-project-root) "make.py")))  
 :error-patterns((warning line-start (file-name) "(" line (zero-or-more not-newline) "): " (message) line-end)
 (error line-start (file-name) "(" line (zero-or-more not-newline) "): " (message) line-end)))
 
@@ -735,6 +735,9 @@
    t)
   (package-initialize))
 
-(server-start)
+(server-start);for other programs to access the current running emacs, like unity opening a file/line number
 
+(require 'omnisharp)
 (add-hook 'csharp-mode-hook 'omnisharp-mode)
+(add-hook 'csharp-mode-hook 'flycheck-mode)
+
