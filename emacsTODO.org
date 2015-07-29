@@ -1,0 +1,8 @@
+* Title
+** subtitle
+TODO learn/bind keys for error jumping
+TODO check out function reference jumping in code, 
+    see if there is an "open doc for this unity class" sort of thing too
+TODO selection highlighting?
+TODO always stop omnisharp server on close request, 
+    no "active processes exist" thing

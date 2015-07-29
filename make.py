@@ -76,8 +76,9 @@ def compile_files(files, filename, inlibs=None):
             tmp.write(r'"/r:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll"'+'\r\n')
             tmp.write(r'"/r:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll"'+'\r\n')
             tmp.write(r'"/r:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll"'+'\r\n')
-            tmp.write(r'"/r:H:\Unity\5.1.1f1\Editor\Data\Managed\UnityEngine.dll"'+'\r\n') 
-            tmp.write(r'"/r:H:\Unity\5.1.1f1\Editor\Data\Managed\UnityEditor.dll"'+'\r\n')
+            tmp.write(r'"/r:C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll"'+'\r\n') 
+            tmp.write(r'"/r:C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.dll"'+'\r\n')
+            tmp.write(r'"/r:C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll"'+'\r\n')
             for l in libs:
                 tmp.write('"/r:%s"\r\n' %os.path.normpath(l))
             tmp.write("/define:DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_1;UNITY_4_0;UNITY_STANDALONE_WIN;ENABLE_PROFILER;UNITY_EDITOR\r\n")
@@ -90,7 +91,7 @@ UnityFolder = ""
 
 def setupUnityFolder():
     if platform.system()=="Windows":
-        platformRoot = r"H:/Unity"
+        platformRoot = r"C:/Program Files/Unity"
     else:
         platformRoot = r"/Applications"
 

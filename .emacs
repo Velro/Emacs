@@ -5,6 +5,11 @@
 ;
 ; - Casey
 
+
+;
+;my mode
+;
+
 ;; Source: http://nullprogram.com/blog/2013/02/06    
 
 ;; My minor mode
@@ -61,6 +66,7 @@
 (add-hook 'emacs-startup-hook 'turn-on-my-mode)
 (add-hook 'after-init-hook 'turn-on-my-mode)
 (add-hook 'text-mode-hook 'turn-on-my-mode)
+
 
 ; Stop Emacs from losing undo information by
 ; setting very high limits for undo buffers
@@ -247,7 +253,7 @@
                                     (access-label          . -4)
                                     (substatement-open     .  0)
                                     (statement-case-intro  .  4)
-                                    (statement-block-intro .  c-lineup-for)
+                                    ;(statement-block-intro .  c-lineup-for)
                                     (case-label            .  4)
                                     (block-open            .  0)
                                     (inline-open           .  0)
@@ -477,6 +483,7 @@
 (define-key my-mode-map  (kbd "C-M-i") 'previous-blank-line)
 (define-key my-mode-map  (kbd "C-M-k") 'next-blank-line)
 
+(define-key my-mode-map "\M-c" 'omnisharp-auto-complete)
 ;end james navigation
 
 (define-key global-map [home] 'beginning-of-line)
@@ -655,8 +662,8 @@
     nil)
 (setq split-window-preferred-function 'casey-never-split-a-window)
 
-(add-to-list 'default-frame-alist '(font . "Courier New-8"))
-(set-face-attribute 'default t :font "Courier New-8")
+(add-to-list 'default-frame-alist '(font . "Courier New-10"))
+(set-face-attribute 'default t :font "Courier New-10")
 ;(set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
 ;(set-face-attribute 'font-lock-comment-face nil :foreground "gray50")
 ;(set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
@@ -677,6 +684,12 @@
 )
 (add-hook 'window-setup-hook 'post-load-stuff t)
 
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
 ;///////////////////////////////////////////////////////
 ;unity stuff
 ;///////////////////////////////////////////////////////
@@ -684,7 +697,7 @@
 
 (defun unity-recompile-game ()
 (interactive)
-(compile  (eval (concat "python " (projectile-project-root) "make.py fast " (projectile-project-root)))))
+(compile  (eval (concat "python " (projectile-project-root) "make.py slow " (projectile-project-root)))))
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -719,7 +732,7 @@
 (flycheck-define-checker csharp-unity
 "Custom checker for Unity projects"
 :modes (csharp-mode)
-:command ("python" (eval (concat (projectile-project-root) "make.py")))  
+:command ("python" (eval (concat (projectile-project-root) "make.py")) "fast" (eval (projectile-project-root)) source-original source)
 :error-patterns((warning line-start (file-name) "(" line (zero-or-more not-newline) "): " (message) line-end)
 (error line-start (file-name) "(" line (zero-or-more not-newline) "): " (message) line-end)))
 
@@ -738,6 +751,10 @@
 (server-start);for other programs to access the current running emacs, like unity opening a file/line number
 
 (require 'omnisharp)
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-(add-hook 'csharp-mode-hook 'flycheck-mode)
+(setq omnisharp--curl-executable-path "C:/Program Files (x86)/Git/bin/curl.exe")
+(setq omnisharp-server-executable-path "C:/Users/James/Downloads/omnisharp-server-mono-2.10.8/OmniSharp/bin/Release/omnisharp.exe")
 
+(add-hook 'csharp-mode-hook 'flycheck-mode)
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(add-hook 'csharp-mode-hook 'electric-pair-mode)
+(add-hook 'csharp-mode-hook 'my-mode)
